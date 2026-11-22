@@ -232,6 +232,290 @@
         }
       ],
       "docs": "Sakuga Tooltip is a plain script that registers a custom element. Load /sakuga-vfx/tooltip.js with a script tag (not a module), then use <sakuga-tooltip text=\"Helpful hint!\"></sakuga-tooltip>. Opens on hover, focus and tap; Escape closes it. More: https://sakuga-vfx.vercel.app"
+    },
+    {
+      "name": "select",
+      "type": "registry:file",
+      "title": "Sakuga Select",
+      "description": "A dropdown select that squashes on open and slices on pick with カチッ. One file, no dependencies, defines <sakuga-select>.",
+      "author": "Justin Finkelman <https://github.com/finktheartist>",
+      "categories": [
+        "select",
+        "dropdown",
+        "input",
+        "anime",
+        "animation"
+      ],
+      "files": [
+        {
+          "path": "select/select.js",
+          "type": "registry:file",
+          "target": "~/public/sakuga-vfx/select.js"
+        }
+      ],
+      "docs": "Sakuga Select is a plain script that registers a custom element. Load /sakuga-vfx/select.js with a script tag (not a module), then use <sakuga-select label=\"Options\"><option value=\"a\">Option A</option></sakuga-select>. Read el.value and listen for change. Works in forms with a name. More: https://sakuga-vfx.vercel.app"
+    },
+    {
+      "name": "accordion",
+      "type": "registry:file",
+      "title": "Sakuga Accordion",
+      "description": "A collapsible panel group that expands with dust puffs and ズザッ. One file, no dependencies, defines <sakuga-accordion>.",
+      "author": "Justin Finkelman <https://github.com/finktheartist>",
+      "categories": [
+        "accordion",
+        "collapse",
+        "anime",
+        "animation"
+      ],
+      "files": [
+        {
+          "path": "accordion/accordion.js",
+          "type": "registry:file",
+          "target": "~/public/sakuga-vfx/accordion.js"
+        }
+      ],
+      "docs": "Sakuga Accordion is a plain script that registers a custom element. Load /sakuga-vfx/accordion.js with a script tag (not a module), then use <sakuga-accordion><div data-title=\"Title\">Content</div></sakuga-accordion>. Listen for change. More: https://sakuga-vfx.vercel.app"
+    },
+    {
+      "name": "stepper",
+      "type": "registry:file",
+      "title": "Sakuga Stepper",
+      "description": "A step navigation control that shoots energy lines and pops with ポン. One file, no dependencies, defines <sakuga-stepper>.",
+      "author": "Justin Finkelman <https://github.com/finktheartist>",
+      "categories": [
+        "stepper",
+        "steps",
+        "navigation",
+        "anime",
+        "animation"
+      ],
+      "files": [
+        {
+          "path": "stepper/stepper.js",
+          "type": "registry:file",
+          "target": "~/public/sakuga-vfx/stepper.js"
+        }
+      ],
+      "docs": "Sakuga Stepper is a plain script that registers a custom element. Load /sakuga-vfx/stepper.js with a script tag (not a module), then use <sakuga-stepper current=\"1\"><option>Step 1</option></sakuga-stepper>. Call el.next() or el.goto(n). More: https://sakuga-vfx.vercel.app"
+    },
+    {
+      "name": "dialog",
+      "type": "registry:file",
+      "title": "Sakuga Dialog",
+      "description": "An anime impact modal dialog that slams down with dust puffs, shockwaves, and ドン!. One file, no dependencies, defines <sakuga-dialog>.",
+      "author": "Justin Finkelman <https://github.com/finktheartist>",
+      "categories": [
+        "dialog",
+        "modal",
+        "overlay",
+        "anime",
+        "animation"
+      ],
+      "files": [
+        {
+          "path": "dialog/dialog.js",
+          "type": "registry:file",
+          "target": "~/public/sakuga-vfx/dialog.js"
+        }
+      ],
+      "docs": "Sakuga Dialog is a plain script that registers a custom element. Load /sakuga-vfx/dialog.js with a script tag (not a module), then use <sakuga-dialog><h2>Title</h2><button data-close>Close</button></sakuga-dialog>. Call el.showModal() and el.close(). More: https://sakuga-vfx.vercel.app"
+    },
+    {
+      "name": "drawer",
+      "type": "registry:file",
+      "title": "Sakuga Drawer",
+      "description": "A slide-over sheet that streaks in with speed lines and brakes with シュッ. One file, no dependencies, defines <sakuga-drawer>.",
+      "author": "Justin Finkelman <https://github.com/finktheartist>",
+      "categories": [
+        "drawer",
+        "sheet",
+        "overlay",
+        "anime",
+        "animation"
+      ],
+      "files": [
+        {
+          "path": "drawer/drawer.js",
+          "type": "registry:file",
+          "target": "~/public/sakuga-vfx/drawer.js"
+        }
+      ],
+      "docs": "Sakuga Drawer is a plain script that registers a custom element. Load /sakuga-vfx/drawer.js with a script tag (not a module), then use <sakuga-drawer side=\"right\">Content</sakuga-drawer>. Call el.open() and el.close(). More: https://sakuga-vfx.vercel.app"
+    },
+    {
+      "name": "popconfirm",
+      "type": "registry:file",
+      "title": "Sakuga Popconfirm",
+      "description": "A speech-bubble confirmation that springs open and clicks with カチッ. One file, no dependencies, defines <sakuga-popconfirm>.",
+      "author": "Justin Finkelman <https://github.com/finktheartist>",
+      "categories": [
+        "popconfirm",
+        "popover",
+        "confirm",
+        "anime",
+        "animation"
+      ],
+      "files": [
+        {
+          "path": "popconfirm/popconfirm.js",
+          "type": "registry:file",
+          "target": "~/public/sakuga-vfx/popconfirm.js"
+        }
+      ],
+      "docs": "Sakuga Popconfirm is a plain script that registers a custom element. Load /sakuga-vfx/popconfirm.js with a script tag (not a module), then wrap a trigger button: <sakuga-popconfirm title=\"Sure?\"><button>Action</button></sakuga-popconfirm>. Listen for confirm and cancel. More: https://sakuga-vfx.vercel.app"
+    },
+    {
+      "name": "badge",
+      "type": "registry:file",
+      "title": "Sakuga Badge",
+      "description": "A notification badge that bounces with ポン on count change and slices with shards when dismissed. One file, no dependencies, defines <sakuga-badge>.",
+      "author": "Justin Finkelman <https://github.com/finktheartist>",
+      "categories": [
+        "badge",
+        "tag",
+        "status",
+        "anime",
+        "animation"
+      ],
+      "files": [
+        {
+          "path": "badge/badge.js",
+          "type": "registry:file",
+          "target": "~/public/sakuga-vfx/badge.js"
+        }
+      ],
+      "docs": "Sakuga Badge is a plain script that registers a custom element. Load /sakuga-vfx/badge.js with a script tag (not a module), then use <sakuga-badge count=\"5\"></sakuga-badge> or <sakuga-badge dismissible>Tag</sakuga-badge>. Set el.count. More: https://sakuga-vfx.vercel.app"
+    },
+    {
+      "name": "counter",
+      "type": "registry:file",
+      "title": "Sakuga Counter",
+      "description": "A combo counter that triggers speed lines, an impact burst, and ドン! on milestones. One file, no dependencies, defines <sakuga-counter>.",
+      "author": "Justin Finkelman <https://github.com/finktheartist>",
+      "categories": [
+        "counter",
+        "combo",
+        "stats",
+        "anime",
+        "animation"
+      ],
+      "files": [
+        {
+          "path": "counter/counter.js",
+          "type": "registry:file",
+          "target": "~/public/sakuga-vfx/counter.js"
+        }
+      ],
+      "docs": "Sakuga Counter is a plain script that registers a custom element. Load /sakuga-vfx/counter.js with a script tag (not a module), then use <sakuga-counter value=\"0\" milestone=\"10\"></sakuga-counter>. Call el.add(n) or el.set(n). More: https://sakuga-vfx.vercel.app"
+    },
+    {
+      "name": "card",
+      "type": "registry:file",
+      "title": "Sakuga Card",
+      "description": "An anime comic panel card with spring tilt and corner speed lines. One file, no dependencies, defines <sakuga-card>.",
+      "author": "Justin Finkelman <https://github.com/finktheartist>",
+      "categories": [
+        "card",
+        "panel",
+        "surface",
+        "anime",
+        "animation"
+      ],
+      "files": [
+        {
+          "path": "card/card.js",
+          "type": "registry:file",
+          "target": "~/public/sakuga-vfx/card.js"
+        }
+      ],
+      "docs": "Sakuga Card is a plain script that registers a custom element. Load /sakuga-vfx/card.js with a script tag (not a module), then use <sakuga-card interactive><h2>Title</h2><p>Content</p></sakuga-card>. Listen for click. More: https://sakuga-vfx.vercel.app"
+    },
+    {
+      "name": "meter",
+      "type": "registry:file",
+      "title": "Sakuga Meter",
+      "description": "An anime combat power and health gauge that flashes damage and rumbles with ゴゴゴゴ. One file, no dependencies, defines <sakuga-meter>.",
+      "author": "Justin Finkelman <https://github.com/finktheartist>",
+      "categories": [
+        "meter",
+        "gauge",
+        "progress",
+        "anime",
+        "animation"
+      ],
+      "files": [
+        {
+          "path": "meter/meter.js",
+          "type": "registry:file",
+          "target": "~/public/sakuga-vfx/meter.js"
+        }
+      ],
+      "docs": "Sakuga Meter is a plain script that registers a custom element. Load /sakuga-vfx/meter.js with a script tag (not a module), then use <sakuga-meter value=\"100\" max=\"100\" label=\"HP\"></sakuga-meter>. Call el.damage(25) or el.heal(25). More: https://sakuga-vfx.vercel.app"
+    },
+    {
+      "name": "segmented",
+      "type": "registry:file",
+      "title": "Sakuga Segmented",
+      "description": "A multi-option switcher whose active indicator streaks across with a motion smear and brakes with シュッ. One file, no dependencies, defines <sakuga-segmented>.",
+      "author": "Justin Finkelman <https://github.com/finktheartist>",
+      "categories": [
+        "segmented",
+        "switcher",
+        "input",
+        "anime",
+        "animation"
+      ],
+      "files": [
+        {
+          "path": "segmented/segmented.js",
+          "type": "registry:file",
+          "target": "~/public/sakuga-vfx/segmented.js"
+        }
+      ],
+      "docs": "Sakuga Segmented is a plain script that registers a custom element. Load /sakuga-vfx/segmented.js with a script tag (not a module), then use <sakuga-segmented value=\"b\"><option value=\"a\">A</option><option value=\"b\">B</option></sakuga-segmented>. Read el.value and listen for change. Works in forms. More: https://sakuga-vfx.vercel.app"
+    },
+    {
+      "name": "spinner",
+      "type": "registry:file",
+      "title": "Sakuga Spinner",
+      "description": "An anime ki vortex and charging aura spinner that pulses and throws energy rings. One file, no dependencies, defines <sakuga-spinner>.",
+      "author": "Justin Finkelman <https://github.com/finktheartist>",
+      "categories": [
+        "spinner",
+        "loading",
+        "loader",
+        "anime",
+        "animation"
+      ],
+      "files": [
+        {
+          "path": "spinner/spinner.js",
+          "type": "registry:file",
+          "target": "~/public/sakuga-vfx/spinner.js"
+        }
+      ],
+      "docs": "Sakuga Spinner is a plain script that registers a custom element. Load /sakuga-vfx/spinner.js with a script tag (not a module), then use <sakuga-spinner size=\"54\" charging></sakuga-spinner>. Call el.done(). More: https://sakuga-vfx.vercel.app"
+    },
+    {
+      "name": "avatar",
+      "type": "registry:file",
+      "title": "Sakuga Avatar",
+      "description": "An anime hero avatar frame that awakens with power wedges, shockwave rings, and ポン on hover or tap. One file, no dependencies, defines <sakuga-avatar>.",
+      "author": "Justin Finkelman <https://github.com/finktheartist>",
+      "categories": [
+        "avatar",
+        "profile",
+        "anime",
+        "animation"
+      ],
+      "files": [
+        {
+          "path": "avatar/avatar.js",
+          "type": "registry:file",
+          "target": "~/public/sakuga-vfx/avatar.js"
+        }
+      ],
+      "docs": "Sakuga Avatar is a plain script that registers a custom element. Load /sakuga-vfx/avatar.js with a script tag (not a module), then use <sakuga-avatar text=\"UA\" size=\"64\" status=\"online\"></sakuga-avatar>. More: https://sakuga-vfx.vercel.app"
     }
   ]
 }

@@ -1,0 +1,47 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Sakuga Meter</title>
+<style>
+  :root { --page: #ffffff; --text: #1d1a4a; --mute: #8580b0; }
+  html { overflow-x: clip; background: var(--page); }
+  body { margin: 0; min-height: 100vh; display: grid; place-items: center; background: var(--page); color: var(--text); font: 15px/1.45 -apple-system, "Helvetica Neue", "Segoe UI", sans-serif; overflow-x: clip; }
+  main { width: min(640px, 100vw - 32px); padding: 40px 0 60px; text-align: center; }
+  h1 { margin: 0; font: italic 800 26px/1.1 "Avenir Next", "Nunito", -apple-system, "Segoe UI", sans-serif; }
+  .sub { margin: 4px 0 0; color: var(--mute); }
+  .stage { display: flex; flex-direction: column; align-items: center; justify-content: center; gap: 24px; min-height: 280px; padding: 40px 0; }
+  .acts { display: flex; gap: 12px; }
+  .btn { padding: 10px 20px; border: 2.5px solid var(--text); border-radius: 12px; background: #fff; font: italic 800 15px/1 "Avenir Next", sans-serif; box-shadow: 3px 4px 0 #b8b3ff; cursor: pointer; }
+  .btn:hover { background: #f4f3fc; }
+  .btn.dmg { border-color: #ff5fa8; color: #ff5fa8; }
+  .hint, .said { margin: 0 4px; color: var(--mute); } .said { min-height: 1.45em; margin-top: 8px; font-size: 13px; }
+  .embed body { place-items: start center; min-height: 0; } .embed h1, .embed .sub, .embed .hint { display: none; } .embed main { padding: 0; }
+</style>
+</head>
+<body>
+<main>
+  <h1>Meter</h1>
+  <p class="sub">A combat power gauge that flashes damage and rumbles with ゴゴゴゴ.</p>
+  <div class="stage">
+    <sakuga-meter id="el" value="100" max="100" label="Stamina"></sakuga-meter>
+    <div class="acts">
+      <button type="button" class="btn dmg" id="btn-dmg">Take Damage (-25)</button>
+      <button type="button" class="btn" id="btn-heal">Recharge (+25)</button>
+    </div>
+  </div>
+  <p class="hint">Take damage to trigger impact frames and crystal shards, or recharge for rumbling.</p>
+  <p class="said" aria-live="polite"></p>
+</main>
+<script src="meter.js"></script>
+<script>
+const Q = new URLSearchParams(location.search), el = document.getElementById('el');
+if (Q.get('embed') === '1') document.documentElement.classList.add('embed');
+const say = (t) => { document.querySelector('.said').textContent = t; };
+document.getElementById('btn-dmg').addEventListener('click', () => el.damage(25));
+document.getElementById('btn-heal').addEventListener('click', () => el.heal(25));
+el.addEventListener('change', (e) => say(`Gauge: ${e.detail.value} (${e.detail.pct}%)`));
+</script>
+</body>
+</html>

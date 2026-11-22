@@ -41,7 +41,7 @@
   <header>
     <div>
       <h1>Sakuga VFX</h1>
-      <p class="lede">Twelve ordinary controls that react like anime: squash and overshoot on springs, and drawn effects (smoke, impact bursts, splashes, slashes) with manga sound-effect lettering. Each one is a single file with no dependencies.</p>
+      <p class="lede">Twenty-four ordinary controls that react like anime: squash and overshoot on springs, and drawn effects (smoke, impact bursts, splashes, slashes, rumbling) with manga sound-effect lettering. Each one is a single file with no dependencies.</p>
       <p class="links">
         <a class="pill" href="https://github.com/finktheartist/sakuga-vfx" target="_blank" rel="noopener">The repo on GitHub <span aria-hidden="true">&#8599;</span></a>
         <a class="pill" href="https://x.com/crtvTeknologist" target="_blank" rel="noopener">@crtvTeknologist on X <span aria-hidden="true">&#8599;</span></a>
@@ -62,6 +62,19 @@
 <script src="../rating/rating.js"></script>
 <script src="../toast/toast.js"></script>
 <script src="../tooltip/tooltip.js"></script>
+<script src="../select/select.js"></script>
+<script src="../accordion/accordion.js"></script>
+<script src="../stepper/stepper.js"></script>
+<script src="../dialog/dialog.js"></script>
+<script src="../drawer/drawer.js"></script>
+<script src="../popconfirm/popconfirm.js"></script>
+<script src="../badge/badge.js"></script>
+<script src="../counter/counter.js"></script>
+<script src="../card/card.js"></script>
+<script src="../meter/meter.js"></script>
+<script src="../segmented/segmented.js"></script>
+<script src="../spinner/spinner.js"></script>
+<script src="../avatar/avatar.js"></script>
 <script>
 // The gallery: every control live on one page, with its install line and a prompt that hands a coding agent the real file.
 const REPO = 'finktheartist/sakuga-vfx';
@@ -78,72 +91,113 @@ const ITEMS = [
   { id: 'rating', name: 'Rating', tag: 'sakuga-rating', how: 'Give it five.', html: '<sakuga-rating label="Rating"></sakuga-rating>' },
   { id: 'toast', name: 'Toast', tag: 'sakuga-toast', how: 'Press Save.', html: '<div class="toastwrap"><sakuga-button variant="secondary" data-demo="save">Save</sakuga-button><sakuga-toast></sakuga-toast></div>' },
   { id: 'tooltip', name: 'Tooltip', tag: 'sakuga-tooltip', how: 'Hover, focus or tap the button.', html: '<sakuga-tooltip text="Helpful hint!"></sakuga-tooltip>' },
+  { id: 'select', name: 'Select', tag: 'sakuga-select', how: 'Click or press Space, pick a hero.', html: '<sakuga-select label="Hero" placeholder="Choose a hero"><option value="deku" selected>Izuku Midoriya</option><option value="bakugo">Katsuki Bakugo</option><option value="todoroki">Shoto Todoroki</option></sakuga-select>' },
+  { id: 'accordion', name: 'Accordion', tag: 'sakuga-accordion', how: 'Click a header to expand.', html: '<sakuga-accordion exclusive><div data-title="Sakuga Style" data-open>Hand-drawn anime visual effects on canvas.</div><div data-title="Zero Dependencies">Pure vanilla Web Components.</div></sakuga-accordion>', wide: true },
+  { id: 'stepper', name: 'Stepper', tag: 'sakuga-stepper', how: 'Click Next or click a step node.', html: '<div style="width:100%;display:flex;flex-direction:column;align-items:center;gap:16px;"><sakuga-stepper current="1" clickable><option>Plan</option><option>Build</option><option>Test</option><option>Ship</option></sakuga-stepper><button type="button" class="pill" data-demo="step-next">Next Step</button></div>', wide: true },
+  { id: 'dialog', name: 'Dialog', tag: 'sakuga-dialog', how: 'Summon the modal.', html: '<div style="display:flex;flex-direction:column;align-items:center;gap:12px;"><button type="button" class="pill" data-demo="open-dialog">Open Dialog</button><sakuga-dialog><h2>Hero Exam</h2><p>Slams down on a spring with ドン!.</p><button type="button" class="pill" data-close>Close</button></sakuga-dialog></div>' },
+  { id: 'drawer', name: 'Drawer', tag: 'sakuga-drawer', how: 'Slide out the sheet.', html: '<div style="display:flex;flex-direction:column;align-items:center;gap:12px;"><button type="button" class="pill" data-demo="open-drawer">Open Sheet</button><sakuga-drawer side="right"><h2>Hero Gear</h2><p>Streaks in with speed lines and シュッ.</p><button type="button" class="pill" data-close>Close</button></sakuga-drawer></div>' },
+  { id: 'popconfirm', name: 'Popconfirm', tag: 'sakuga-popconfirm', how: 'Click the button for the speech bubble.', html: '<sakuga-popconfirm title="Execute Plus Ultra?"><button type="button" class="pill">Deploy Move</button></sakuga-popconfirm>' },
+  { id: 'badge', name: 'Badge', tag: 'sakuga-badge', how: 'Increment or dismiss the tag.', html: '<div style="display:flex;align-items:center;gap:16px;"><sakuga-badge count="5"></sakuga-badge><sakuga-badge dismissible>Pro Hero</sakuga-badge><button type="button" class="pill" data-demo="inc-badge">+1</button></div>' },
+  { id: 'counter', name: 'Counter', tag: 'sakuga-counter', how: 'Hit to build combo milestones.', html: '<div style="display:flex;flex-direction:column;align-items:center;gap:12px;"><sakuga-counter value="0" milestone="5" label="Combo Hits"></sakuga-counter><button type="button" class="pill" data-demo="inc-counter">Hit (+1)</button></div>' },
+  { id: 'card', name: 'Card', tag: 'sakuga-card', how: 'Hover for 3D tilt, click for reaction.', html: '<sakuga-card interactive><h2>UA Academy</h2><p>Interactive comic panel card that tilts on a spring.</p></sakuga-card>' },
+  { id: 'meter', name: 'Meter', tag: 'sakuga-meter', how: 'Damage flashes, recharge rumbles.', html: '<div style="width:100%;display:flex;flex-direction:column;align-items:center;gap:12px;"><sakuga-meter value="100" max="100" label="HP"></sakuga-meter><div style="display:flex;gap:8px;"><button type="button" class="pill" data-demo="dmg-meter">Damage (-25)</button><button type="button" class="pill" data-demo="heal-meter">Heal (+25)</button></div></div>' },
+  { id: 'segmented', name: 'Segmented', tag: 'sakuga-segmented', how: 'Click or arrow keys to dash.', html: '<sakuga-segmented value="weekly"><option value="daily">Daily</option><option value="weekly">Weekly</option><option value="monthly">Monthly</option></sakuga-segmented>' },
+  { id: 'spinner', name: 'Spinner', tag: 'sakuga-spinner', how: 'Ki vortex and charging aura.', html: '<div style="display:flex;align-items:center;gap:16px;"><sakuga-spinner size="48"></sakuga-spinner><sakuga-spinner id="spin-charge" size="58" charging label="Charging"></sakuga-spinner><button type="button" class="pill" data-demo="done-spinner">Done</button></div>' },
+  { id: 'avatar', name: 'Avatar', tag: 'sakuga-avatar', how: 'Hover or tap for Awakening.', html: '<div style="display:flex;align-items:center;gap:20px;"><sakuga-avatar text="AM" size="60" status="online"></sakuga-avatar><sakuga-avatar text="DK" size="60" status="busy"></sakuga-avatar></div>' },
 ];
 
-// What each prompt says about wiring its component in. The rest of the prompt is the same for all of them.
+// What each prompt says about wiring its component in.
 const WIRE = {
-  button: ['Use <sakuga-button>Confirm</sakuga-button> where my main button is, and <sakuga-button variant="secondary">Cancel</sakuga-button> for a quieter one. The text inside is the label.',
-    'Listen for click on the element as usual. For a submit button inside a form, add type="submit". The disabled attribute works like a button\'s.',
-    'When the action has actually succeeded, call el.done() to land a check on the button. Do not call it for a failure.'],
-  toggle: ['Use <sakuga-toggle label="..."></sakuga-toggle> where my switch is. The label is what a screen reader hears, so name the setting.',
-    'Read el.checked and listen for change. With a name attribute it is sent with its form like a checkbox (value "on", or the value attribute).',
-    'Setting el.checked from code jumps to the end without the animation; only a person flipping it plays it. The drawing is bigger than the switch, so the element keeps a margin around it for the splash.'],
-  slider: ['Use <sakuga-slider value="30" label="..."></sakuga-slider> where my slider is. min, max, step and unit (shown after the number, "%" by default) work as attributes.',
-    'Read el.value. It fires input while it moves and change when it is let go. With a name attribute it is sent with its form.',
-    'It is 230 pixels wide; set the --sk-slider-width CSS variable to change that. It keeps 30 pixels above it for the value bubble.'],
-  checkbox: ['Use <sakuga-checkbox>Remember me</sakuga-checkbox>. The text inside is the label.', 'Read el.checked and listen for change. With a name attribute it is sent with its form like a checkbox.'],
-  radio: ['List the choices as <option>s inside it: <sakuga-radio label="Plan"><option value="a" selected>Option A</option><option value="b">Option B</option></sakuga-radio>. The label is what a screen reader hears for the group.',
-    'Read el.value and listen for change. With a name attribute it is sent with its form.'],
-  input: ['Use <sakuga-input label="..." placeholder="..."></sakuga-input> where my text field is. type can be text, email, search, url, tel or password.',
-    'Read and set el.value. It fires input and change like a text input. With a name attribute it is sent with its form.',
-    'It is 230 pixels wide; set the --sk-input-width CSS variable to change that.'],
-  tabs: ['List the tabs as <option>s inside it: <sakuga-tabs label="..."><option value="home">Home</option>...</sakuga-tabs>.',
-    'It only draws the tabs. Listen for change (e.detail has index, value and label) and show the matching panel yourself. el.selected is the index; setting it moves the tab without the landing effects.'],
-  progress: ['Put <sakuga-progress label="..."></sakuga-progress> where my progress bar is. The label is what a screen reader hears, so say what is loading.',
-    'Wire it to my real task: call el.set(n) with progress from 0 to 1 as often as it changes. The bar eases toward the number, so a jump is still ridden. el.set(n, true) goes straight there.',
-    'Listen for the "sakuga:done" event and move on from there. It fires once, when the bar itself reaches the end, a moment after my task finishes. el.reset() puts it back to 0.',
-    'With the demo attribute it plays a pretend load on a loop. Do not ship it with that attribute.',
-    'It is 280 pixels wide (set --sk-progress-width to change it) and keeps 70 pixels above the bar for the cloud and about 110 below for the ground and the percentage.'],
-  rating: ['Use <sakuga-rating label="..."></sakuga-rating>.', 'Read el.value (0 to 5) and listen for change. Clicking the lit star again clears it. With a name attribute it is sent with its form.'],
-  toast: ['Put <sakuga-toast></sakuga-toast> where my toasts should appear, and call el.show("Saved") when there is something to say. It is a status region, so the message is read out.',
-    'It stays for the duration attribute (2.6 seconds by default), or until el.hide(). It has a close button.',
-    'The element keeps its place on the page while the toast is hidden. Position it yourself, for example position: fixed; left: 24px; bottom: 24px.'],
-  tooltip: ['Use <sakuga-tooltip text="..." label="..."></sakuga-tooltip> next to the thing it explains. text is the hint; label is what a screen reader calls the button ("Help" by default).',
-    'It opens on hover, focus and tap, and Escape closes it. Whatever is inside the element replaces the "?" on the button.'],
+  button: ['Use <sakuga-button>Confirm</sakuga-button> where my main button is, and <sakuga-button variant="secondary">Cancel</sakuga-button> for a quieter one.', 'Listen for click on the element.', 'When the action succeeds, call el.done() to land a check on the button.'],
+  toggle: ['Use <sakuga-toggle label="..."></sakuga-toggle> where my switch is.', 'Read el.checked and listen for change. With a name attribute it is sent with its form.'],
+  slider: ['Use <sakuga-slider value="30" label="..."></sakuga-slider> where my slider is.', 'Read el.value. It fires input while it moves and change when let go.'],
+  checkbox: ['Use <sakuga-checkbox>Remember me</sakuga-checkbox>.', 'Read el.checked and listen for change.'],
+  radio: ['List choices as <option>s inside: <sakuga-radio label="Plan"><option value="a">A</option></sakuga-radio>.', 'Read el.value and listen for change.'],
+  input: ['Use <sakuga-input label="..." placeholder="..."></sakuga-input>.', 'Read and set el.value.'],
+  tabs: ['List tabs as <option>s inside: <sakuga-tabs><option>Home</option></sakuga-tabs>.', 'Listen for change (e.detail: index, value, label).'],
+  progress: ['Put <sakuga-progress label="..."></sakuga-progress> where the bar is.', 'Call el.set(n) from 0 to 1. Listen for "sakuga:done".'],
+  rating: ['Use <sakuga-rating label="..."></sakuga-rating>.', 'Read el.value (0 to 5) and listen for change.'],
+  toast: ['Put <sakuga-toast></sakuga-toast> on the page and call el.show("Saved").', 'Duration defaults to 2.6s or until el.hide().'],
+  tooltip: ['Use <sakuga-tooltip text="..." label="..."></sakuga-tooltip>.', 'Opens on hover, focus and tap; Escape closes it.'],
+  select: ['Use <sakuga-select label="Hero"><option value="1">One</option></sakuga-select>.', 'Read el.value and listen for change. Works in forms.'],
+  accordion: ['Use <sakuga-accordion><div data-title="Title">Content</div></sakuga-accordion>.', 'Add exclusive attribute if only one panel should be open at once.'],
+  stepper: ['Use <sakuga-stepper current="1"><option>Step 1</option></sakuga-stepper>.', 'Call el.next(), el.prev(), or el.goto(step). Read el.current.'],
+  dialog: ['Use <sakuga-dialog><h2>Title</h2><button data-close>Close</button></sakuga-dialog>.', 'Call el.showModal() and el.close().'],
+  drawer: ['Use <sakuga-drawer side="right">Content</sakuga-drawer>.', 'Call el.open() and el.close(). Read el.isOpen.'],
+  popconfirm: ['Wrap a trigger: <sakuga-popconfirm title="Sure?"><button>Action</button></sakuga-popconfirm>.', 'Listen for confirm and cancel events.'],
+  badge: ['Use <sakuga-badge count="5"></sakuga-badge> or <sakuga-badge dismissible>Tag</sakuga-badge>.', 'Update el.count or listen for dismiss event.'],
+  counter: ['Use <sakuga-counter value="0" milestone="10" label="Combo"></sakuga-counter>.', 'Call el.add(n) or el.set(n).'],
+  card: ['Use <sakuga-card interactive>Content</sakuga-card>.', 'Tilts on spring pointer move, clicks with カチッ.'],
+  meter: ['Use <sakuga-meter value="100" max="100" label="HP"></sakuga-meter>.', 'Call el.damage(25) or el.heal(25).'],
+  segmented: ['Use <sakuga-segmented value="b"><option value="a">A</option></sakuga-segmented>.', 'Read el.value and listen for change.'],
+  spinner: ['Use <sakuga-spinner size="52"></sakuga-spinner> or with charging attribute.', 'Call el.done() to trigger the finishing burst.'],
+  avatar: ['Use <sakuga-avatar text="UA" size="60" status="online"></sakuga-avatar>.', 'Tap or hover triggers the Awakening burst.']
 };
+
 const SKILL = { url: new URL('../skills/sakuga-vfx/SKILL.md', location.href).href, install: `npx skills add ${REPO}` };
 const fileUrl = (id) => new URL(`../${id}/${id}.js`, location.href).href;
 const prompt = (it) => [
   `Add the Sakuga ${it.name.toLowerCase()} to my app. It is a single JavaScript file with no dependencies that defines a <${it.tag}> element.`,
   `1. Get the file from ${fileUrl(it.id)} and save it in my project as ${it.id}.js. Do not rewrite it or split it up.`,
   `2. Load it with a plain script tag (not type="module").`,
-  ...WIRE[it.id].map((l, i) => `${i + 3}. ${l}`),
-  `${WIRE[it.id].length + 3}. Its effects are drawn on one fixed canvas over the page, so they can fly outside the control. They switch off for prefers-reduced-motion. Its colours are --sk-* CSS variables.`,
-  `When you are done, show me where you put it and what listens to it. If something about it needs to look different, tell me instead of editing the effects.`,
-  ``,
-  `These components were made with my sakuga-vfx skill: ${SKILL.url}`,
-  `If you can install skills, install it with: ${SKILL.install}`,
-  `Read it before you start. For this job, follow its "Wire it in" and "Check it" sections. If I later ask you to change how it reacts, or to make another control in the same style, use the whole skill.`,
+  ...(WIRE[it.id] || []).map((l, i) => `${i + 3}. ${l}`),
+  `${(WIRE[it.id] || []).length + 3}. Its effects are drawn on one fixed canvas over the page. They switch off for prefers-reduced-motion. Colours are --sk-* CSS variables.`,
+  `When you are done, show me where you put it and what listens to it.`
 ].join('\n');
 
 const grid = document.getElementById('grid');
 for (const it of ITEMS) {
   const card = document.createElement('section'); card.className = 'card' + (it.wide ? ' wide' : '');
   card.innerHTML = `<h2>${it.name}<span>&lt;${it.tag}&gt;</span></h2><p class="how">${it.how}</p><div class="stage">${it.html}</div><p class="said" aria-live="polite"></p>
-    <div class="acts"><a class="pill" href="../${it.id}/">Docs and demo</a><button class="pill" type="button" data-copy="cmd">Copy install</button><button class="pill" type="button" data-copy="prompt">Copy a prompt for your agent</button></div>`;
+    <div class="acts"><a class="pill" href="../${it.id}/">Docs and demo</a><button class="pill" type="button" data-copy="cmd">Copy install</button><button class="pill" type="button" data-copy="prompt">Copy prompt</button></div>`;
   const said = card.querySelector('.said');
   card.querySelector('[data-copy=cmd]').addEventListener('click', (e) => copy(`npx shadcn add ${REPO}/${it.id}`, e.currentTarget, said));
   card.querySelector('[data-copy=prompt]').addEventListener('click', (e) => copy(prompt(it), e.currentTarget, said));
   grid.append(card);
-  const el = card.querySelector(it.tag), say = (t) => { said.textContent = t; };   // the one line under each control that says what happened
+  const el = card.querySelector(it.tag), say = (t) => { said.textContent = t; };
+
   if (it.tag === 'sakuga-button' && el.dataset.demo === 'primary') el.addEventListener('click', () => { say('Clicked'); setTimeout(() => el.done(), 760); });
   else if (it.tag === 'sakuga-button') el.addEventListener('click', () => say('Clicked'));
   else if (it.tag === 'sakuga-toast') card.querySelector('[data-demo=save]').addEventListener('click', () => el.show('Saved successfully!'));
   else if (it.tag === 'sakuga-progress') el.addEventListener('sakuga:done', () => say('sakuga:done'));
   else if (it.tag === 'sakuga-tabs') el.addEventListener('change', (e) => say(`Tab: ${e.detail.label}`));
-  else el.addEventListener('change', () => say(`change: ${it.tag === 'sakuga-toggle' || it.tag === 'sakuga-checkbox' ? (el.checked ? 'on' : 'off') : el.value}`));
+  else if (it.tag === 'sakuga-stepper') {
+    el.addEventListener('change', (e) => say(`Step: ${e.detail.current}`));
+    card.querySelector('[data-demo=step-next]')?.addEventListener('click', () => el.next());
+  } else if (it.tag === 'sakuga-dialog') {
+    card.querySelector('[data-demo=open-dialog]').addEventListener('click', () => { el.showModal(); say('Dialog open'); });
+    el.addEventListener('sakuga:close', () => say('Dialog closed'));
+  } else if (it.tag === 'sakuga-drawer') {
+    card.querySelector('[data-demo=open-drawer]').addEventListener('click', () => { el.open(); say('Drawer open'); });
+    el.addEventListener('sakuga:close', () => say('Drawer closed'));
+  } else if (it.tag === 'sakuga-popconfirm') {
+    el.addEventListener('confirm', () => say('Confirmed!'));
+    el.addEventListener('cancel', () => say('Cancelled'));
+  } else if (it.tag === 'sakuga-badge') {
+    card.querySelector('[data-demo=inc-badge]')?.addEventListener('click', () => { el.count = (el.count || 0) + 1; say(`Badge: ${el.count}`); });
+  } else if (it.tag === 'sakuga-counter') {
+    card.querySelector('[data-demo=inc-counter]')?.addEventListener('click', () => el.add(1));
+    el.addEventListener('change', (e) => say(`Count: ${e.detail.value}${e.detail.isMilestone ? ' (Milestone!)' : ''}`));
+  } else if (it.tag === 'sakuga-card') {
+    el.addEventListener('click', () => say('Card clicked'));
+  } else if (it.tag === 'sakuga-meter') {
+    card.querySelector('[data-demo=dmg-meter]')?.addEventListener('click', () => el.damage(25));
+    card.querySelector('[data-demo=heal-meter]')?.addEventListener('click', () => el.heal(25));
+    el.addEventListener('change', (e) => say(`HP: ${e.detail.value} (${e.detail.pct}%)`));
+  } else if (it.tag === 'sakuga-spinner') {
+    card.querySelector('[data-demo=done-spinner]')?.addEventListener('click', () => {
+      card.querySelector('#spin-charge')?.done();
+      say('Spinner done! Burst triggered.');
+    });
+  } else if (it.tag === 'sakuga-avatar') {
+    card.querySelectorAll('sakuga-avatar').forEach((av) => {
+      av.addEventListener('awaken', () => say(`${av.getAttribute('text')} Awakened!`));
+    });
+  } else {
+    el.addEventListener('change', () => say(`change: ${it.tag === 'sakuga-toggle' || it.tag === 'sakuga-checkbox' ? (el.checked ? 'on' : 'off') : el.value}`));
+  }
 }
-// Copying needs the clipboard API, which plain http (other than localhost) does not have, so fall back to a selected textarea.
+
 async function copy(text, btn, said) {
   let ok = false;
   try { await navigator.clipboard.writeText(text); ok = true; } catch {

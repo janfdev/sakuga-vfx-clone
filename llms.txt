@@ -1,33 +1,46 @@
 # Sakuga VFX
 
-> Ordinary UI controls that react like anime: squash and overshoot on springs, and drawn effects (smoke, impact bursts, slashes, splashes) with manga sound-effect lettering, on one canvas over the page. Each is one plain script that registers a custom element: no dependencies, no build step, no other files to fetch. MIT licensed.
+> Ordinary UI controls that react like anime: squash and overshoot on springs, and drawn effects (smoke, impact bursts, slashes, splashes, rumbling) with manga sound-effect lettering, on one canvas over the page. Each is one plain script that registers a custom element: no dependencies, no build step, no other files to fetch. MIT licensed.
 
 Live gallery: https://sakuga-vfx.vercel.app
 Source: https://github.com/finktheartist/sakuga-vfx
 
-## Drop-in components
+## Drop-in components (24 total)
 
 Each is one plain script that registers a custom element. Load it with a script tag, not as a module. Do not rewrite or split the file. Each file carries a copy of the shared core; the first one loaded sets window.SakugaFX and the rest reuse it, so any mix shares one canvas and one loop.
 
-- [Button](https://sakuga-vfx.vercel.app/button/button.js): A button that reacts like an anime impact frame: it squashes when pressed, inverts for one frame on release, and a burst goes off behind it with clouds and ドン!. A secondary variant is quieter. `<sakuga-button>`: <sakuga-button>Confirm</sakuga-button> (variant="secondary" for the quiet one). Listen for click; call el.done() when the action worked to land a check on it. [Docs](https://github.com/finktheartist/sakuga-vfx/blob/main/button/README.md)
-- [Toggle](https://sakuga-vfx.vercel.app/toggle/toggle.js): A switch whose flip is 43 painted frames: the knob smears across, slams into the end, throws up a splash, and the track floods and settles. The frames are inside the file (about 500 KB). `<sakuga-toggle>`: <sakuga-toggle label="Notifications"></sakuga-toggle>. Read el.checked and listen for change. Works in forms with a name. [Docs](https://github.com/finktheartist/sakuga-vfx/blob/main/toggle/README.md)
-- [Slider](https://sakuga-vfx.vercel.app/slider/slider.js): A range slider whose thumb stretches and lags on a spring, with cumulus rolling up behind a fast drag and a crescent thrown ahead on release. `<sakuga-slider>`: <sakuga-slider value="30" label="Volume"></sakuga-slider>, with min, max, step and unit. Read el.value; it fires input and change. Works in forms with a name. [Docs](https://github.com/finktheartist/sakuga-vfx/blob/main/slider/README.md)
-- [Checkbox](https://sakuga-vfx.vercel.app/checkbox/checkbox.js): A checkbox that slashes: crescents swing round the box, crystals fly, the tick draws itself, and ズザッ lands in dotted letters. `<sakuga-checkbox>`: <sakuga-checkbox>Remember me</sakuga-checkbox>. Read el.checked and listen for change. Works in forms with a name. [Docs](https://github.com/finktheartist/sakuga-vfx/blob/main/checkbox/README.md)
-- [Radio](https://sakuga-vfx.vercel.app/radio/radio.js): A radio group whose picked dot springs in with a fan of wedges, two puffs and a hollow ポン. `<sakuga-radio>`: <sakuga-radio label="Plan"><option value="a" selected>Option A</option><option value="b">Option B</option></sakuga-radio>. Read el.value and listen for change. Works in forms with a name. [Docs](https://github.com/finktheartist/sakuga-vfx/blob/main/radio/README.md)
-- [Input](https://sakuga-vfx.vercel.app/input/input.js): A text field that kicks up a puff of dust from the caret on every key. `<sakuga-input>`: <sakuga-input label="Name" placeholder="Type something"></sakuga-input>. Read and set el.value; it fires input and change. Works in forms with a name. [Docs](https://github.com/finktheartist/sakuga-vfx/blob/main/input/README.md)
-- [Tabs](https://sakuga-vfx.vercel.app/tabs/tabs.js): Tabs where the raised tab slides to the one you pick, stretching, and lands with wedges and a puff. `<sakuga-tabs>`: <sakuga-tabs label="Sections"><option>Home</option><option>Profile</option></sakuga-tabs>. Listen for change (e.detail: index, value, label) and show the panel yourself. [Docs](https://github.com/finktheartist/sakuga-vfx/blob/main/tabs/README.md)
-- [Progress](https://sakuga-vfx.vercel.app/progress/progress.js): A loading bar with a storm cloud riding its leading edge, pebbles lifting off the ground and ゴゴゴゴ; at the end a burst, ドン! and a check. `<sakuga-progress>`: <sakuga-progress label="Loading"></sakuga-progress>, then el.set(n) with progress from 0 to 1. Listen for sakuga:done (fires once). el.reset() for the next task. [Docs](https://github.com/finktheartist/sakuga-vfx/blob/main/progress/README.md)
-- [Rating](https://sakuga-vfx.vercel.app/rating/rating.js): Five stars that pop in one after another, with wedges and a hollow ポン on the last; five gets a burst. `<sakuga-rating>`: <sakuga-rating label="Rating"></sakuga-rating>. Read el.value (0 to 5) and listen for change. Works in forms with a name. [Docs](https://github.com/finktheartist/sakuga-vfx/blob/main/rating/README.md)
-- [Toast](https://sakuga-vfx.vercel.app/toast/toast.js): A notification that streaks in as a smear, lands in dust with ズザッ, wobbles and leaves by shrinking. `<sakuga-toast>`: Put <sakuga-toast></sakuga-toast> where toasts should appear and call el.show("Saved"). It stays for the duration attribute (2.6 s) or until el.hide(). [Docs](https://github.com/finktheartist/sakuga-vfx/blob/main/toast/README.md)
-- [Tooltip](https://sakuga-vfx.vercel.app/tooltip/tooltip.js): A help button whose hint springs out like a speech bubble, with puffs and a hollow カチッ. `<sakuga-tooltip>`: <sakuga-tooltip text="Helpful hint!"></sakuga-tooltip>. Opens on hover, focus and tap; Escape closes it. [Docs](https://github.com/finktheartist/sakuga-vfx/blob/main/tooltip/README.md)
+- [Button](https://sakuga-vfx.vercel.app/button/button.js): `<sakuga-button>`: A button that reacts like an anime impact frame with clouds and ドン!. [Docs](https://github.com/finktheartist/sakuga-vfx/blob/main/button/README.md)
+- [Toggle](https://sakuga-vfx.vercel.app/toggle/toggle.js): `<sakuga-toggle>`: Switch whose flip is 43 painted frames with splash. [Docs](https://github.com/finktheartist/sakuga-vfx/blob/main/toggle/README.md)
+- [Slider](https://sakuga-vfx.vercel.app/slider/slider.js): `<sakuga-slider>`: Range slider whose thumb stretches and lags with cumulus. [Docs](https://github.com/finktheartist/sakuga-vfx/blob/main/slider/README.md)
+- [Checkbox](https://sakuga-vfx.vercel.app/checkbox/checkbox.js): `<sakuga-checkbox>`: Slashes with crystals, tick draws itself, ズザッ. [Docs](https://github.com/finktheartist/sakuga-vfx/blob/main/checkbox/README.md)
+- [Radio](https://sakuga-vfx.vercel.app/radio/radio.js): `<sakuga-radio>`: Dot springs in with wedges, puffs and ポン. [Docs](https://github.com/finktheartist/sakuga-vfx/blob/main/radio/README.md)
+- [Input](https://sakuga-vfx.vercel.app/input/input.js): `<sakuga-input>`: Text field that kicks up dust from caret on every key. [Docs](https://github.com/finktheartist/sakuga-vfx/blob/main/input/README.md)
+- [Tabs](https://sakuga-vfx.vercel.app/tabs/tabs.js): `<sakuga-tabs>`: Raised tab slides, stretching, and lands with a puff. [Docs](https://github.com/finktheartist/sakuga-vfx/blob/main/tabs/README.md)
+- [Progress](https://sakuga-vfx.vercel.app/progress/progress.js): `<sakuga-progress>`: Storm cloud rides leading edge with ゴゴゴゴ and finishing ドン!. [Docs](https://github.com/finktheartist/sakuga-vfx/blob/main/progress/README.md)
+- [Rating](https://sakuga-vfx.vercel.app/rating/rating.js): `<sakuga-rating>`: Stars pop with ポン; five gets a burst. [Docs](https://github.com/finktheartist/sakuga-vfx/blob/main/rating/README.md)
+- [Toast](https://sakuga-vfx.vercel.app/toast/toast.js): `<sakuga-toast>`: Notification streaks in with smear and ズザッ. [Docs](https://github.com/finktheartist/sakuga-vfx/blob/main/toast/README.md)
+- [Tooltip](https://sakuga-vfx.vercel.app/tooltip/tooltip.js): `<sakuga-tooltip>`: Springs out like a speech bubble with カチッ. [Docs](https://github.com/finktheartist/sakuga-vfx/blob/main/tooltip/README.md)
+- [Select](https://sakuga-vfx.vercel.app/select/select.js): `<sakuga-select>`: Dropdown menu that springs open and slices on pick with カチッ. [Docs](https://github.com/finktheartist/sakuga-vfx/blob/main/select/README.md)
+- [Accordion](https://sakuga-vfx.vercel.app/accordion/accordion.js): `<sakuga-accordion>`: Collapsible panels with spring height transition, dust puffs, and ズザッ. [Docs](https://github.com/finktheartist/sakuga-vfx/blob/main/accordion/README.md)
+- [Stepper](https://sakuga-vfx.vercel.app/stepper/stepper.js): `<sakuga-stepper>`: Step navigation that shoots energy lines, shockwave rings, and ポン. [Docs](https://github.com/finktheartist/sakuga-vfx/blob/main/stepper/README.md)
+- [Dialog](https://sakuga-vfx.vercel.app/dialog/dialog.js): `<sakuga-dialog>`: Impact modal dialog that slams down with dust clouds and massive ドン!. [Docs](https://github.com/finktheartist/sakuga-vfx/blob/main/dialog/README.md)
+- [Drawer](https://sakuga-vfx.vercel.app/drawer/drawer.js): `<sakuga-drawer>`: Slide-over sheet that streaks in with speed lines and brakes with シュッ. [Docs](https://github.com/finktheartist/sakuga-vfx/blob/main/drawer/README.md)
+- [Popconfirm](https://sakuga-vfx.vercel.app/popconfirm/popconfirm.js): `<sakuga-popconfirm>`: Speech-bubble confirmation that springs open and clicks with カチッ. [Docs](https://github.com/finktheartist/sakuga-vfx/blob/main/popconfirm/README.md)
+- [Badge](https://sakuga-vfx.vercel.app/badge/badge.js): `<sakuga-badge>`: Bounces with ポン on count change and slices with shards when dismissed. [Docs](https://github.com/finktheartist/sakuga-vfx/blob/main/badge/README.md)
+- [Counter](https://sakuga-vfx.vercel.app/counter/counter.js): `<sakuga-counter>`: Combo counter that triggers speed lines, burst, and ドン! on milestones. [Docs](https://github.com/finktheartist/sakuga-vfx/blob/main/counter/README.md)
+- [Card](https://sakuga-vfx.vercel.app/card/card.js): `<sakuga-card>`: Comic panel card with 3D spring tilt, corner speed lines, and click reaction. [Docs](https://github.com/finktheartist/sakuga-vfx/blob/main/card/README.md)
+- [Meter](https://sakuga-vfx.vercel.app/meter/meter.js): `<sakuga-meter>`: Combat power & health gauge; damage flashes impact frame with shards, recharge rumbles with ゴゴゴゴ. [Docs](https://github.com/finktheartist/sakuga-vfx/blob/main/meter/README.md)
+- [Segmented](https://sakuga-vfx.vercel.app/segmented/segmented.js): `<sakuga-segmented>`: Dash switcher; indicator streaks with motion smear and brakes with シュッ. [Docs](https://github.com/finktheartist/sakuga-vfx/blob/main/segmented/README.md)
+- [Spinner](https://sakuga-vfx.vercel.app/spinner/spinner.js): `<sakuga-spinner>`: Ki vortex aura spinner that pulses shockwave rings and finishes with impact burst. [Docs](https://github.com/finktheartist/sakuga-vfx/blob/main/spinner/README.md)
+- [Avatar](https://sakuga-vfx.vercel.app/avatar/avatar.js): `<sakuga-avatar>`: Hero avatar that awakens with power wedges, shockwave ring, and ポン. [Docs](https://github.com/finktheartist/sakuga-vfx/blob/main/avatar/README.md)
 
-Install any one with the shadcn CLI: `npx shadcn add finktheartist/sakuga-vfx/NAME`, where NAME is button, toggle, slider, checkbox, radio, input, tabs, progress, rating, toast, tooltip. The file lands in `public/sakuga-vfx/`.
+Install any one with the shadcn CLI: `npx shadcn add finktheartist/sakuga-vfx/NAME`. The file lands in `public/sakuga-vfx/`.
 
 Colours are --sk-* CSS variables; a page's own :root values win. Effects switch off for prefers-reduced-motion.
 
 ## The skill
 
 - [sakuga-vfx skill](https://sakuga-vfx.vercel.app/skills/sakuga-vfx/SKILL.md): the workflow and rules these were made by. Install with `npx skills add finktheartist/sakuga-vfx`.
-- [core.js](https://sakuga-vfx.vercel.app/skills/sakuga-vfx/core.js): the shared core (Spring, the effects, the lettering, the palette, a custom-element base class with one clock).
-- [starter.html](https://sakuga-vfx.vercel.app/skills/sakuga-vfx/starter.html): the smallest whole example, a like button.
-- [look.mjs](https://sakuga-vfx.vercel.app/skills/sakuga-vfx/look.mjs): stops the clock, steps a reaction to chosen moments and saves the frames side by side.
+- [core.js](https://sakuga-vfx.vercel.app/skills/sakuga-vfx/core.js): the shared core.
+- [starter.html](https://sakuga-vfx.vercel.app/skills/sakuga-vfx/starter.html): starter like button template.
+- [look.mjs](https://sakuga-vfx.vercel.app/skills/sakuga-vfx/look.mjs): frame-by-frame visual audit script.

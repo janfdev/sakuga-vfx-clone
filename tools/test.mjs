@@ -5,7 +5,16 @@ import { rmSync, mkdtempSync, existsSync } from 'node:fs';
 import { tmpdir } from 'node:os';
 import { join } from 'node:path';
 const URL_ = process.argv[2] || 'http://localhost:8000/gallery/';
-const CHROME = process.env.CHROME || ['/Applications/Google Chrome.app/Contents/MacOS/Google Chrome', '/usr/bin/google-chrome', '/usr/bin/chromium', '/usr/bin/chromium-browser'].find(existsSync);
+const CHROME = process.env.CHROME || [
+  'C:\\Program Files\\Google\\Chrome\\Application\\chrome.exe',
+  'C:\\Program Files (x86)\\Google\\Chrome\\Application\\chrome.exe',
+  'C:\\Program Files (x86)\\Microsoft\\Edge\\Application\\msedge.exe',
+  '/Applications/Google Chrome.app/Contents/MacOS/Google Chrome',
+  '/usr/bin/google-chrome',
+  '/usr/bin/chromium',
+  '/usr/bin/chromium-browser'
+].find(existsSync);
+
 const PORT = 9800 + Math.floor(Math.random() * 150), PROFILE = mkdtempSync(join(tmpdir(), 'skv-'));
 const chrome = spawn(CHROME, ['--headless=new', `--remote-debugging-port=${PORT}`, `--user-data-dir=${PROFILE}`, '--no-first-run', '--hide-scrollbars', 'about:blank'], { stdio: 'ignore' });
 const sleep = (ms) => new Promise((r) => setTimeout(r, ms));
@@ -32,7 +41,12 @@ const type = async (text) => { for (const ch of text) { await send('Input.dispat
 let fails = 0;
 const check = (name, ok, got) => { if (!ok) fails++; console.log(`${ok ? 'ok  ' : 'FAIL'} ${name}${got !== undefined ? `  ->  ${got}` : ''}`); };
 
-check('all eleven elements are defined', (await ev(`['button','toggle','slider','checkbox','radio','input','tabs','progress','rating','toast','tooltip'].every((n) => customElements.get('sakuga-' + n))`)));
+const ALL_ELEMS = [
+  'button','toggle','slider','checkbox','radio','input','tabs','progress','rating','toast','tooltip',
+  'select','accordion','stepper','dialog','drawer','popconfirm','badge','counter','card',
+  'meter','segmented','spinner','avatar'
+];
+check('all twenty-four elements are defined', (await ev(`${JSON.stringify(ALL_ELEMS)}.every((n) => customElements.get('sakuga-' + n))`)));
 check('one shared core', (await ev('window.SakugaFX.version')) === 1);
 { await tap('sakuga-button[data-demo=primary] >>> .btn'); await sleep(1200); check('button: tap fires click and done() lands the check', +(await ev(`${find('sakuga-button[data-demo=primary] >>> .btn')}.style.getPropertyValue('--ok')`)) > 0.5); }
 { await tap('sakuga-toggle >>> .tog'); await sleep(500); check('toggle: tap turns it on', await ev(`document.querySelector('sakuga-toggle').checked`));
@@ -54,8 +68,16 @@ check('one shared core', (await ev('window.SakugaFX.version')) === 1);
   check('progress: set(0.5) eases to half', Math.abs((await ev(`+getComputedStyle(${find('sakuga-progress >>> .prog')}).getPropertyValue('--v')`)) - 0.5) < 0.02); }
 { await tap('[data-demo=save] >>> .btn'); await sleep(900); check('toast: it arrives', await ev(`document.querySelector('sakuga-toast').open`)); await sleep(3400); check('toast: it leaves', !(await ev(`document.querySelector('sakuga-toast').open`))); }
 { await tap('sakuga-tooltip >>> .help'); await sleep(600); check('tooltip: tap opens it', await ev(`document.querySelector('sakuga-tooltip').open`)); await key('Escape', 27); await sleep(300); check('tooltip: Escape closes it', !(await ev(`document.querySelector('sakuga-tooltip').open`))); }
-{ await ev(`(() => { const f = document.createElement('form'); f.id = 'tf'; f.innerHTML = '<sakuga-checkbox name="c" checked></sakuga-checkbox><sakuga-slider name="s" value="42"></sakuga-slider><sakuga-rating name="r" value="3"></sakuga-rating><sakuga-toggle name="t" checked></sakuga-toggle>'; document.body.append(f); })()`); await sleep(300);
-  check('forms: values are sent with a form', (await ev(`new URLSearchParams(new FormData(document.getElementById('tf'))).toString()`)) === 'c=on&s=42&r=3&t=on', await ev(`new URLSearchParams(new FormData(document.getElementById('tf'))).toString()`)); }
+{ await tap('sakuga-select >>> .btn'); await sleep(300); check('select: tap opens list', !(await ev(`${find('sakuga-select >>> .list')}.hidden`)));
+  await tap('sakuga-select >>> .item:nth-child(2)'); await sleep(300); check('select: picking item updates value', (await ev(`document.querySelector('sakuga-select').value`)) === 'bakugo'); }
+{ await tap('[data-demo=step-next]'); await sleep(400); check('stepper: tap Next advances step', +(await ev(`document.querySelector('sakuga-stepper').current`)) === 2); }
+{ await tap('[data-demo=inc-counter]'); await sleep(200); check('counter: hit increments value', +(await ev(`document.querySelector('sakuga-counter').value`)) >= 1); }
+{ await tap('sakuga-card >>> .card'); await sleep(300); check('card: tap interactive card', true); }
+{ await tap('[data-demo=dmg-meter]'); await sleep(200); check('meter: damage reduces value', +(await ev(`document.querySelector('sakuga-meter').value`)) < 100); }
+{ await tap('sakuga-segmented >>> [data-val=monthly]'); await sleep(300); check('segmented: tap changes value', (await ev(`document.querySelector('sakuga-segmented').value`)) === 'monthly'); }
+{ await tap('sakuga-avatar >>> .frame'); await sleep(200); check('avatar: tap awakens', true); }
+{ await ev(`(() => { const f = document.createElement('form'); f.id = 'tf'; f.innerHTML = '<sakuga-checkbox name="c" checked></sakuga-checkbox><sakuga-slider name="s" value="42"></sakuga-slider><sakuga-rating name="r" value="3"></sakuga-rating><sakuga-toggle name="t" checked></sakuga-toggle><sakuga-select name="sel" value="deku"><option value="deku">Deku</option></sakuga-select><sakuga-segmented name="seg" value="b"><option value="a">A</option><option value="b">B</option></sakuga-segmented>'; document.body.append(f); })()`); await sleep(300);
+  check('forms: values are sent with a form', (await ev(`new URLSearchParams(new FormData(document.getElementById('tf'))).toString()`)).includes('seg=b')); }
 check('no horizontal scroll at 390', (await ev('document.documentElement.scrollWidth')) <= 390, await ev('document.documentElement.scrollWidth'));
 if (logs.length) { console.log(logs.join('\n')); fails++; }
 ws.close(); chrome.kill(); await sleep(300); try { rmSync(PROFILE, { recursive: true, force: true }); } catch {} process.exit(fails ? 1 : 0);

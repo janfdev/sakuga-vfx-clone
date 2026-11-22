@@ -34,13 +34,13 @@ Each is one plain script that registers a custom element. Load it with a script 
 - [Spinner](https://sakuga-vfx.vercel.app/spinner/spinner.js): `<sakuga-spinner>`: Ki vortex aura spinner that pulses shockwave rings and finishes with impact burst. [Docs](https://github.com/finktheartist/sakuga-vfx/blob/main/spinner/README.md)
 - [Avatar](https://sakuga-vfx.vercel.app/avatar/avatar.js): `<sakuga-avatar>`: Hero avatar that awakens with power wedges, shockwave ring, and ポン. [Docs](https://github.com/finktheartist/sakuga-vfx/blob/main/avatar/README.md)
 
-Install any one with the shadcn CLI: `npx shadcn add finktheartist/sakuga-vfx/NAME`. The file lands in `public/sakuga-vfx/`.
+Install: Each component is standalone. Copy the file into your project (e.g. `public/sakuga-vfx/<name>.js`) and load it with `<script src="<name>.js"></script>`. (Registry CLI commands are temporarily detached until the custom registry URL is configured).
 
 Colours are --sk-* CSS variables; a page's own :root values win. Effects switch off for prefers-reduced-motion.
 
 ## The skill
 
-- [sakuga-vfx skill](https://sakuga-vfx.vercel.app/skills/sakuga-vfx/SKILL.md): the workflow and rules these were made by. Install with `npx skills add finktheartist/sakuga-vfx`.
-- [core.js](https://sakuga-vfx.vercel.app/skills/sakuga-vfx/core.js): the shared core.
-- [starter.html](https://sakuga-vfx.vercel.app/skills/sakuga-vfx/starter.html): starter like button template.
-- [look.mjs](https://sakuga-vfx.vercel.app/skills/sakuga-vfx/look.mjs): frame-by-frame visual audit script.
+- [sakuga-vfx skill](skills/sakuga-vfx/SKILL.md): the workflow and rules these were made by (located in `skills/sakuga-vfx/`).
+- [core.js](skills/sakuga-vfx/core.js): the shared core.
+- [starter.html](skills/sakuga-vfx/starter.html): starter like button template.
+- [look.mjs](skills/sakuga-vfx/look.mjs): frame-by-frame visual audit script.

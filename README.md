@@ -81,21 +81,18 @@ That opens the gallery, with all twenty-four controls live.
 
 ## Use one
 
-Each is a single file that defines an element. Install it with the shadcn CLI, which puts the file in `public/sakuga-vfx/`:
+Each is a single standalone file that defines an element (zero dependencies, plain JavaScript). Copy the component `.js` file directly from this repo into your project (e.g. into `public/sakuga-vfx/` or your assets directory).
 
-```sh
-npx shadcn add finktheartist/sakuga-vfx/button
-npx shadcn add finktheartist/sakuga-vfx/select
-npx shadcn add finktheartist/sakuga-vfx/meter
-# ...and all 24 components
-```
-
-Or copy the file into your project by hand. Then load it with a plain script tag and use its element:
+Load it with a plain script tag (not `type="module"`) and use its custom element:
 
 ```html
+<!-- Load any component file directly -->
 <script src="meter.js"></script>
 <sakuga-meter value="100" max="100" label="HP"></sakuga-meter>
 ```
+
+> [!NOTE]
+> Perintah instalasi CLI registry (`npx shadcn add ...`) sengaja dicabut untuk sementara waktu agar tidak mengarah ke registry pihak ketiga dan menghindari 404, sampai registry baru dipublikasikan. Untuk saat ini cukup copy/download file komponen secara langsung dari repositori ini.
 
 Each folder's README lists the attributes, properties and events. Value controls (select, segmented, toggle, slider, checkbox, radio, input, rating) work inside a `<form>` like the native ones.
 
@@ -103,11 +100,7 @@ Each folder's README lists the attributes, properties and events. Value controls
 
 ## Make your own
 
-`skills/sakuga-vfx/` is the workflow these were made by, written as a skill for a coding agent. Install it with:
-
-```sh
-npx skills add finktheartist/sakuga-vfx
-```
+`skills/sakuga-vfx/` is the workflow these were made by, written as a skill for coding agents. Skill ini tersedia langsung di repositori ini pada folder `skills/sakuga-vfx/` (dan terinstall di Antigravity pada `~/.gemini/config/skills/sakuga-vfx/`).
 
 - `SKILL.md` is the workflow and the rules.
 - `core.js` is the core every component is built on.

@@ -3,7 +3,7 @@
 <head>
 <meta charset="utf-8">
 <meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
-<title>Sakuga VFX</title>
+<title>Sakuga VFX (Extended Clone)</title>
 <style>
   :root { --page: #ffffff; --text: #1d1a4a; --mute: #8580b0; --line: #dcdaf0; --chip: #f4f3fc; }
   * { box-sizing: border-box; }
@@ -40,11 +40,12 @@
 <div class="wrap">
   <header>
     <div>
-      <h1>Sakuga VFX</h1>
-      <p class="lede">Twenty-four ordinary controls that react like anime: squash and overshoot on springs, and drawn effects (smoke, impact bursts, splashes, slashes, rumbling) with manga sound-effect lettering. Each one is a single file with no dependencies.</p>
+      <h1>Sakuga VFX (Extended)</h1>
+      <p class="lede">Twenty-four ordinary controls that react like anime: squash and overshoot on springs, and drawn effects (smoke, impact bursts, splashes, slashes, rumbling) with manga sound-effect lettering. Each one is a single standalone file with no dependencies.</p>
       <p class="links">
-        <a class="pill" href="https://github.com/finktheartist/sakuga-vfx" target="_blank" rel="noopener">The repo on GitHub <span aria-hidden="true">&#8599;</span></a>
-        <a class="pill" href="https://x.com/crtvTeknologist" target="_blank" rel="noopener">@crtvTeknologist on X <span aria-hidden="true">&#8599;</span></a>
+        <a class="pill" href="https://github.com/janfdev/sakuga-vfx-clone" target="_blank" rel="noopener">This Extended Clone on GitHub <span aria-hidden="true">&#8599;</span></a>
+        <a class="pill" href="https://github.com/finktheartist/sakuga-vfx" target="_blank" rel="noopener">Original by @finktheartist <span aria-hidden="true">&#8599;</span></a>
+        <a class="pill" href="https://sakuga-vfx.vercel.app/" target="_blank" rel="noopener">Original Live Site <span aria-hidden="true">&#8599;</span></a>
       </p>
     </div>
   </header>
@@ -76,8 +77,7 @@
 <script src="../spinner/spinner.js"></script>
 <script src="../avatar/avatar.js"></script>
 <script>
-// The gallery: every control live on one page, with its install line and a prompt that hands a coding agent the real file.
-const REPO = 'finktheartist/sakuga-vfx';
+// The gallery: every control live on one page, with standalone script copying and an agent prompt.
 const ITEMS = [
   { id: 'button', name: 'Primary button', tag: 'sakuga-button', how: 'Click it.', html: '<sakuga-button data-demo="primary">Confirm</sakuga-button>' },
   { id: 'button', name: 'Secondary button', tag: 'sakuga-button', how: 'Click it.', html: '<sakuga-button variant="secondary">Cancel</sakuga-button>' },
@@ -102,7 +102,7 @@ const ITEMS = [
   { id: 'card', name: 'Card', tag: 'sakuga-card', how: 'Hover for 3D tilt, click for reaction.', html: '<sakuga-card interactive><h2>UA Academy</h2><p>Interactive comic panel card that tilts on a spring.</p></sakuga-card>' },
   { id: 'meter', name: 'Meter', tag: 'sakuga-meter', how: 'Damage flashes, recharge rumbles.', html: '<div style="width:100%;display:flex;flex-direction:column;align-items:center;gap:12px;"><sakuga-meter value="100" max="100" label="HP"></sakuga-meter><div style="display:flex;gap:8px;"><button type="button" class="pill" data-demo="dmg-meter">Damage (-25)</button><button type="button" class="pill" data-demo="heal-meter">Heal (+25)</button></div></div>' },
   { id: 'segmented', name: 'Segmented', tag: 'sakuga-segmented', how: 'Click or arrow keys to dash.', html: '<sakuga-segmented value="weekly"><option value="daily">Daily</option><option value="weekly">Weekly</option><option value="monthly">Monthly</option></sakuga-segmented>' },
-  { id: 'spinner', name: 'Spinner', tag: 'sakuga-spinner', how: 'Ki vortex and charging aura.', html: '<div style="display:flex;align-items:center;gap:16px;"><sakuga-spinner size="48"></sakuga-spinner><sakuga-spinner id="spin-charge" size="58" charging label="Charging"></sakuga-spinner><button type="button" class="pill" data-demo="done-spinner">Done</button></div>' },
+  { id: 'spinner', name: 'Spinner', tag: 'sakuga-spinner', how: 'Ki vortex and charging aura.', html: '<div style="display:flex;align-items:center;gap:20px;"><sakuga-spinner size="48"></sakuga-spinner><sakuga-spinner id="spin-charge" size="58" charging label="Charging"></sakuga-spinner><button type="button" class="pill" data-demo="done-spinner">Done</button></div>' },
   { id: 'avatar', name: 'Avatar', tag: 'sakuga-avatar', how: 'Hover or tap for Awakening.', html: '<div style="display:flex;align-items:center;gap:20px;"><sakuga-avatar text="AM" size="60" status="online"></sakuga-avatar><sakuga-avatar text="DK" size="60" status="busy"></sakuga-avatar></div>' },
 ];
 
@@ -134,12 +134,11 @@ const WIRE = {
   avatar: ['Use <sakuga-avatar text="UA" size="60" status="online"></sakuga-avatar>.', 'Tap or hover triggers the Awakening burst.']
 };
 
-const SKILL = { url: new URL('../skills/sakuga-vfx/SKILL.md', location.href).href, install: `npx skills add ${REPO}` };
 const fileUrl = (id) => new URL(`../${id}/${id}.js`, location.href).href;
 const prompt = (it) => [
   `Add the Sakuga ${it.name.toLowerCase()} to my app. It is a single JavaScript file with no dependencies that defines a <${it.tag}> element.`,
-  `1. Get the file from ${fileUrl(it.id)} and save it in my project as ${it.id}.js. Do not rewrite it or split it up.`,
-  `2. Load it with a plain script tag (not type="module").`,
+  `1. Copy the file from ${it.id}/${it.id}.js into my project. Do not rewrite it or split it up.`,
+  `2. Load it with a plain script tag: <script src="${it.id}.js"><\/script> (not type="module").`,
   ...(WIRE[it.id] || []).map((l, i) => `${i + 3}. ${l}`),
   `${(WIRE[it.id] || []).length + 3}. Its effects are drawn on one fixed canvas over the page. They switch off for prefers-reduced-motion. Colours are --sk-* CSS variables.`,
   `When you are done, show me where you put it and what listens to it.`
@@ -149,9 +148,9 @@ const grid = document.getElementById('grid');
 for (const it of ITEMS) {
   const card = document.createElement('section'); card.className = 'card' + (it.wide ? ' wide' : '');
   card.innerHTML = `<h2>${it.name}<span>&lt;${it.tag}&gt;</span></h2><p class="how">${it.how}</p><div class="stage">${it.html}</div><p class="said" aria-live="polite"></p>
-    <div class="acts"><a class="pill" href="../${it.id}/">Docs and demo</a><button class="pill" type="button" data-copy="cmd">Copy install</button><button class="pill" type="button" data-copy="prompt">Copy prompt</button></div>`;
+    <div class="acts"><a class="pill" href="../${it.id}/">Docs and demo</a><button class="pill" type="button" data-copy="script">Copy &lt;script&gt; tag</button><button class="pill" type="button" data-copy="prompt">Copy prompt</button></div>`;
   const said = card.querySelector('.said');
-  card.querySelector('[data-copy=cmd]').addEventListener('click', (e) => copy(`npx shadcn add ${REPO}/${it.id}`, e.currentTarget, said));
+  card.querySelector('[data-copy=script]').addEventListener('click', (e) => copy(`<script src="${it.id}.js"><\/script>`, e.currentTarget, said));
   card.querySelector('[data-copy=prompt]').addEventListener('click', (e) => copy(prompt(it), e.currentTarget, said));
   grid.append(card);
   const el = card.querySelector(it.tag), say = (t) => { said.textContent = t; };
@@ -204,7 +203,7 @@ async function copy(text, btn, said) {
     const t = Object.assign(document.createElement('textarea'), { value: text }); t.style.cssText = 'position:fixed;opacity:0'; document.body.append(t); t.select();
     try { ok = document.execCommand('copy'); } catch {} t.remove();
   }
-  said.textContent = ok ? (btn.dataset.copy === 'cmd' ? 'Install command copied' : 'Prompt copied') : 'Could not copy here';
+  said.textContent = ok ? (btn.dataset.copy === 'script' ? 'Script tag copied' : 'Prompt copied') : 'Could not copy here';
 }
 </script>
 </body>
